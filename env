@@ -1,0 +1,64 @@
+# vim: set filetype=sh:
+
+#
+# General
+#
+export DOTFILES="$HOME/.dotfiles"
+
+#
+# System
+#
+export PLATFORM='unknown'
+uname_str=$(uname)
+if [[ "$uname_str" == 'Darwin' ]]; then
+    export PLATFORM='osx'
+elif [[ "$uname_str" == 'Linux' ]]; then
+    export PLATFORM='linux'
+elif [[ "$uname_str" == 'FreeBSD' ]]; then
+    export PLATFORM='freebsd'
+fi
+
+#
+# User
+#
+export EDITOR=vim
+
+export DEBFULLNAME="Peter Ragone"
+export DEBEMAIL=pcragone@gmail.com
+
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
+
+#
+# Path
+#
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/bin:/usr/sbin:/sbin"
+
+# heroku toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+if [[ "$PLATFORM" == "osx" ]]; then
+    # xcode and xcode tools
+    export XCODE="`xcode-select --print-path`"
+    export PATH="$XCODE/Tools:$PATH"
+    # ruby gems
+    export PATH="/usr/local/opt/ruby/bin:$PATH"
+    # MacTeX
+    export PATH="/usr/local/texlive/2014/bin/x86_64-darwin:$PATH"
+fi
+
+#
+# Secrets
+#
+if [ -f ~/.secrets ]; then
+    source ~/.secrets
+fi
+
+# Powerline
+# At least for linux...
+if [[ "$PLATFORM" == "linux" ]]; then
+  POWERLINE_ROOT="/usr/local/lib/python2.7/dist-packages"
+fi
+
+if [[ "$PLATFORM" == "osx" ]]; then
+  POWERLINE_ROOT=""
+fi

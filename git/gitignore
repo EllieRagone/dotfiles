@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+.*
+!.gitignore
+*~
+tags
+gems.tags
