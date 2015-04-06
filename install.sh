@@ -61,7 +61,7 @@ link_file 'bash_profile'
 # oh-my-zsh
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 ln -sf $DOTFILES/zsh/oh-my-zsh/pragone.zsh-theme ~/.oh-my-zsh/themes/pragone.zsh-theme
-ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zshrc ~/.zshrc
+ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh-zshrc ~/.zshrc
 
 
 # # git
@@ -92,6 +92,9 @@ link_file "ruby/gemrc"
 # bin/
 # ln -sf $DOTFILES/bin/ $HOME/bin
 link_file "bin"
+
+# battery status
+link_file "battery"
 
 # lib/
 link_file "lib"

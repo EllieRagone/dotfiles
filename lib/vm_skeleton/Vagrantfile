@@ -123,4 +123,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, :inline=> "touch /home/vagrant/.psql_history", privileged: false
+  config.vm.provision :shell, inline: 'apt-get update; apt-get install -y python-software-properties; add-apt-repository -y ppa:git-core/ppa; apt-get update; apt-get install -y git', privileged: true
+  config.vm.provision :shell, inline: 'git clone https://github.com/pcragone/dotfiles $HOME/.dotfiles; cd $HOME/.dotfiles; ./install.sh', privileged: false
+  
 end

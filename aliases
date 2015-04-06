@@ -21,3 +21,13 @@ alias la='ls -alhFg'
 # Gist
 #
 alias gist='gist -cps'
+
+alias please='sudo $(fc -ln -1)'
+alias tml="tmux list-sessions"
+alias tma="tmux -2 attach -t $1"
+alias tmk="tmux kill-session -t $1"
+
+uname_str=$(uname)
+if [[ "$uname_str" == 'Darwin' ]]; then
+  alias vim='mvim -v'
+fi
