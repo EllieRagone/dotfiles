@@ -45,16 +45,24 @@ link_file 'env'
 link_file 'bash_profile'
 
 # zsh
-# ln -sf $DOTFILES/zsh/prezto/zprezto/ $HOME/.zprezto
-link_file "zsh/prezto/zprezto"
-# ln -sf $DOTFILES/zsh/prezto/zlogin $HOME/.zlogin
-link_file "zsh/prezto/zlogin"
-# ln -sf $DOTFILES/zsh/prezto/zshenv $HOME/.zshenv
-link_file "zsh/prezto/zshenv"
-# ln -sf $DOTFILES/zsh/prezto/zshrc $HOME/.zshrc
-link_file "zsh/prezto/zshrc"
-# ln -sf $DOTFILES/zsh/prezto/zpreztorc $HOME/.zpreztorc
-link_file "zsh/prezto/zpreztorc"
+# prezto - super slow; (it's supposed to be better than oh-my-zsh by being
+# faster. I had the exact opposite experience)
+# # ln -sf $DOTFILES/zsh/prezto/zprezto/ $HOME/.zprezto
+# link_file "zsh/prezto/zprezto"
+# # ln -sf $DOTFILES/zsh/prezto/zlogin $HOME/.zlogin
+# link_file "zsh/prezto/zlogin"
+# # ln -sf $DOTFILES/zsh/prezto/zshenv $HOME/.zshenv
+# link_file "zsh/prezto/zshenv"
+# # ln -sf $DOTFILES/zsh/prezto/zshrc $HOME/.zshrc
+# link_file "zsh/prezto/zshrc"
+# # ln -sf $DOTFILES/zsh/prezto/zpreztorc $HOME/.zpreztorc
+# link_file "zsh/prezto/zpreztorc"
+
+# oh-my-zsh
+curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+ln -sf $DOTFILES/zsh/oh-my-zsh/pragone.zsh-theme ~/.oh-my-zsh/themes/pragone.zsh-theme
+ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zshrc ~/.zshrc
+
 
 # # git
 # ln -sf $DOTFILES/git/gitconfig $HOME/.gitconfig
@@ -66,7 +74,7 @@ link_file "git/gitignore"
 # ln -sf $DOTFILES/vimrc $HOME/.vimrc
 link_file "vimrc"
 # ln -sf $DOTFILES/vim/ $HOME/.vim
-# link_file "vim"
+link_file "vim"
 # mkdir -p $HOME/.vimundo # the directory for undo files.
 
 # tmux
