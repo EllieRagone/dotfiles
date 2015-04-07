@@ -28,3 +28,9 @@ cp $HOME/lib/vm-skeleton/Vagrantfile $HOME/projects/$project_name/Vagrantfile
 cp $HOME/lib/vm-skeleton/Cheffile $HOME/projects/$project_name/Cheffile
 cd $HOME/projects/$project_name
 vagrant up
+
+echo "Finding port..."
+action_set_name=`cat .vagrant/machines/default/virtualbox/action_set_name`
+port=`sed 's/00:00:00.237903 NAT: set redirect TCP host port \([0-9][0-9][0-9][0-9]\) =>.*$/\1/' /Users/pragone/VirtualBox\ VMs/*$log_id*/Logs/VBox.log | grep '^3' $HOME/VirtualBox\ VMs/*$action_set_name*/Logs/VBox.log`
+echo $port > $HOME/.pow/$project_name
+echo "Linked virtual machine to $project_name.dev"
