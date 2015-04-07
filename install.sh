@@ -94,7 +94,9 @@ link_file "ruby/gemrc"
 link_file "bin"
 
 # battery status
-link_file "battery"
+if [ $PLATFORM = "osx" ]; then
+  link_file "battery"
+fi
 
 # lib/
 link_file "lib"

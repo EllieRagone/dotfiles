@@ -4,7 +4,9 @@ function collapse_pwd {
 }
 
 function battery_charge {
-    echo `$BAT_CHARGE` 2>/dev/null
+    if [ uname = "Darwin" ]; then
+      echo `$BAT_CHARGE` 2>/dev/null
+    fi
 }
 
 function prompt_char {
