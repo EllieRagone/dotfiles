@@ -28,7 +28,7 @@ function run_or_exit {
 
 function link_file {
   filename=${1##*/}
-  run_or_exit "ln -sf $DOTFILES/$1 $HOME/.$filename" "Symlinked $1 to ~/.$filename" "Unable to create symlink for $1"
+  run_or_exit "ln -sf $DOTFILES/$1 $HOME/.$filename" "Symlinked $1 to $HOME/.$filename" "Unable to create symlink for $1"
 }
 
 run_or_exit "source ./env" "Sourced ./env" "Unable to source ./env"
@@ -59,9 +59,10 @@ link_file 'bash_profile'
 # link_file "zsh/prezto/zpreztorc"
 
 # oh-my-zsh
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-ln -sf $DOTFILES/zsh/oh-my-zsh/pragone.zsh-theme ~/.oh-my-zsh/themes/pragone.zsh-theme
-ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh-zshrc ~/.zshrc
+# curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+# ln -sf $DOTFILES/zsh/oh-my-zsh/pragone.zsh-theme $HOME/.oh-my-zsh/themes/pragone.zsh-theme
+ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh $HOME/.oh-my-zsh
+ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh-zshrc $HOME/.zshrc
 
 
 # # git
@@ -99,7 +100,7 @@ if [ $PLATFORM = "osx" ]; then
 fi
 
 # lib/
-link_file "lib"
+ln -sf $DOTFILES/lib $HOME/lib
 
 # # Install Vundle
 run_or_exit "git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
@@ -107,19 +108,19 @@ run_or_exit "git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundl
 run_or_exit "vim +PluginInstall +qall"
 
 # Compile YouCompleteMe
-cd ~/.vim/bundle/YouCompleteMe
+cd $HOME/.vim/bundle/YouCompleteMe
 ./install.sh
 cd $DOTFILES
 
 sudo pip install powerline-status
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mkdir ~/.fonts
-mv PowerlineSymbols.otf ~/.fonts/
-fc-cache -vf ~/.fonts/
-mkdir -p ~/.config/fontconfig/conf.d/
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+mkdir $HOME/.fonts
+mv PowerlineSymbols.otf $HOME/.fonts/
+fc-cache -vf $HOME/.fonts/
+mkdir -p $HOME/.config/fontconfig/conf.d/
+mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/
 
-echo "source \"$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf\"" >> ~/.tmux.conf
+echo "source \"$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf\"" >> $HOME/.tmux.conf
 
 chsh -s /bin/zsh
