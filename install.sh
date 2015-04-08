@@ -123,4 +123,4 @@ mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/
 
 echo "source \"$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf\"" >> $HOME/.tmux.conf
 
-chsh -s /bin/zsh
+sudo chsh -s /bin/zsh
