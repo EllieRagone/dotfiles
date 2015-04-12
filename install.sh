@@ -103,7 +103,7 @@ fi
 ln -sf $DOTFILES/lib $HOME/lib
 
 # # Install Vundle
-run_or_exit "git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
+# run_or_exit "git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
 # # Install Vim plugins:
 run_or_exit "vim +PluginInstall +qall"
 
