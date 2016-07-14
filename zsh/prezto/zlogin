@@ -1,3 +1,7 @@
+#.zlogin is sourced on the start of a login shell. This file is often used to
+#start X using startx. Some systems start X on boot, so this file is not always
+#very useful.
+#
 #
 # Executes commands at login post-zshrc.
 #
@@ -21,3 +25,6 @@ if (( $+commands[fortune] )); then
     print
   fi
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

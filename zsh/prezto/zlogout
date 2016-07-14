@@ -1,3 +1,5 @@
+#.zlogout is sometimes used to clear and reset the terminal.
+#
 #
 # Executes commands at logout.
 #

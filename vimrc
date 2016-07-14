@@ -17,7 +17,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'nanotech/jellybeans.vim'
-" "Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
@@ -73,6 +73,11 @@ set clipboard=unnamed
 set synmaxcol=180
 set textwidth=80
 set ttyscroll=10
+" These next three options deal with trying to speed up the editor when syntax
+" highlighting is on in rails files
+set re=1
+set ttyfast
+set lazyredraw
 set encoding=utf-8
 set tabstop=2
 set nowrap
@@ -295,12 +300,14 @@ nmap <script> <silent> <leader>L :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>Q :call ToggleQuickfixList()<CR>
 
 " Tabular.vim
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
+" if exists(":Tabularize")
+nmap <leader>a=<CR> :Tabularize /=<CR>
+vmap <leader>a=<CR> :Tabularize /=<CR>
+nmap <leader>a=> :Tabularize /=><CR>
+vmap <leader>a=> :Tabularize /=><CR>
+nmap <leader>a: :Tabularize /:\zs<CR>
+vmap <leader>a: :Tabularize /:\zs<CR>
+" endif
 
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <silent> <F8> :TagbarToggle<CR>
@@ -324,3 +331,4 @@ set splitright
 " Ctrl+W T
 " "Close every window in the current tabview but the current one
 " Ctrl+W o
+set diffopt=filler,context:0
