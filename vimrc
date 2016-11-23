@@ -37,7 +37,7 @@ Bundle 'jingweno/vimux-zeus'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'milkypostman/vim-togglelist'
 Bundle 'bkad/CamelCaseMotion'
 Bundle 'ecomba/vim-ruby-refactoring'
@@ -100,6 +100,7 @@ autocmd BufWritePre *.slim :%s/\s\+$//e
 
 au BufNewFile * set noeol
 au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile {*.god,*.thor,*.pill,*.axlsx} set ft=ruby
 
 " No show command
 autocmd VimEnter * set nosc

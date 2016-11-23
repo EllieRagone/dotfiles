@@ -1,0 +1,39 @@
+# ~/.tmuxinator/boxes_of_tomatoes.yml
+
+name: boxes_of_tomatoes
+root: ~/projects/boxes_of_tomatoes
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre:
+#   - /Users/projects/boxes_of_tomatoes/startzeus
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - logs:
+      layout: main-horizontal
+      layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
+      panes:
+        - tail -f log/zeus.log
+        - tail -f log/development.log
+#        - tail -f log/test.log
+  - sql: psql -U boxes_of_tomatoes -d boxes_of_tomatoes_development
+  - console: rails console
+  # - guard: guard
+  - sidekiq: 
+      layout: main-horizontal
+      layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
+      panes:
+        - ruby start_redis.rb
+        - sidekiq
+  - editor: vim

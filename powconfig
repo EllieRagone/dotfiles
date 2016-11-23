@@ -1,0 +1,4 @@
+export POW_DOMAINS=dev,pow
+export POW_WORKERS=3
+export POW_TIMEOUT=1800
+
