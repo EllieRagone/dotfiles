@@ -21,3 +21,7 @@
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
+[url "https://"]
+	insteadOf = git://
+[url "https://github.com"]
+	insteadOf = git://github.com

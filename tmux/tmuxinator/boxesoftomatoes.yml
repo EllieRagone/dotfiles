@@ -1,7 +1,7 @@
 # ~/.tmuxinator/boxes_of_tomatoes.yml
 
 name: boxes_of_tomatoes
-root: ~/projects/boxes_of_tomatoes
+root: ~/projects/boxes_of_tomatoes/rails
 
 # Optional tmux socket
 # socket_name: foo
@@ -29,7 +29,7 @@ windows:
 #        - tail -f log/test.log
   - sql: psql -U boxes_of_tomatoes -d boxes_of_tomatoes_development
   - console: rails console
-  # - guard: guard
+  - guard: guard
   - sidekiq: 
       layout: main-horizontal
       layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
@@ -37,3 +37,4 @@ windows:
         - ruby start_redis.rb
         - sidekiq
   - editor: vim
+  - shell:

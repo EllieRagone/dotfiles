@@ -1,0 +1,56 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 40.328204
+  longitude: -79.577780
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 300
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  platform: yr
+
+zwave:
+  usb_path: /dev/zwave
+  config: /srv/hass/src/python-openzwave/openzwave/config
+
+#automation:
+#  -alias: heal at 2:30am
+#    trigger:
+#      platform: time
+#      after: '2:30:00'
+#    action:
+#      service: zwave.heal_network
