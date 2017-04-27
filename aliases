@@ -33,3 +33,4 @@ if [[ "$uname_str" == 'Darwin' ]]; then
   # alias vim='mvim -v'
 fi
 alias psql='pgcli'
+
