@@ -6,12 +6,12 @@ git clone https://www.github.com/pcragone/dotfiles ~/.dotfiles
 
 # git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-ln -sf ~/.zlogout ~/.dotfiles/prompt/.zlogout
-ln -sf ~/.zpreztorc ~/.dotfiles/prompt/zpreztorc
-ln -sf ~/.zprofile ~/.dotfiles/prompt/zprofile
-ln -sf ~/.zshenv ~/.dotfiles/prompt/zshenv
-ln -sf ~/.zshrc ~/.dotfiles/prompt/zshrc
-ln -sf ~/.zprezto/modules/prompt/functions/prompt_peter_setup ~/.dotfiles/prompt/prompt_peter_setup
+ln -sf ~/.dotfiles/prompt/.zlogout ~/.zlogout
+ln -sf ~/.dotfiles/prompt/zpreztorc ~/.zpreztorc
+ln -sf ~/.dotfiles/prompt/zprofile ~/.zprofile
+ln -sf ~/.dotfiles/prompt/zshenv ~/.zshenv
+ln -sf ~/.dotfiles/prompt/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/prompt/prompt_peter_setup ~/.zprezto/modules/prompt/functions/prompt_peter_setup
 #
 # chsh -f /bin/zsh
 #
@@ -26,3 +26,6 @@ ln -sf ~/.zprezto/modules/prompt/functions/prompt_peter_setup ~/.dotfiles/prompt
 
 
 ln -sf ~/bin ~/.dotfiles/bin
+
+# git config --global user.name 'Peter Ragone'
+# git config --global user.email 'pcragone@gmail.com'
