@@ -25,6 +25,7 @@ ln -sf ~/.vimrc ~/.dotfiles/vimrc
 vim +BundleInstall +qall
 
 
+ln -sf ~/.aliases ~/.dotfiles/aliases
 ln -sf ~/bin ~/.dotfiles/bin
 
 git config --global user.name 'Peter Ragone'
