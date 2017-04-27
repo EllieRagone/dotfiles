@@ -1,3 +1,6 @@
+```
+\curl -sSL https://raw.githubusercontent.com/pcragone/dotfiles/master/install2.sh | bash
+```
 
 # Install
 
