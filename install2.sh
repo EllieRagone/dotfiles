@@ -29,3 +29,9 @@ ln -sf ~/bin ~/.dotfiles/bin
 
 git config --global user.name 'Peter Ragone'
 git config --global user.email 'pcragone@gmail.com'
+git config --global push.default simple
+
+# if linux
+git config --global credential.helper store
+# if mac
+git config --global credential.helper osxkeychain
