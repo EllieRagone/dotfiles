@@ -21,18 +21,24 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -sf ~/.vimrc ~/.dotfiles/vimrc
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
 vim +BundleInstall +qall
 
 
-ln -sf ~/.aliases ~/.dotfiles/aliases
-ln -sf ~/bin ~/.dotfiles/bin
+ln -sf ~/.dotfiles/aliases ~/.aliases
+ln -sf ~/.dotfiles/bin ~/bin
 
 git config --global user.name 'Peter Ragone'
 git config --global user.email 'pcragone@gmail.com'
 git config --global push.default simple
 
-# if linux
-git config --global credential.helper store
-# if mac
-git config --global credential.helper osxkeychain
+if [ `uname` = 'Darwin' ]
+then
+  git config --global credential.helper osxkeychain
+fi
+
+if [ `uname` = 'Linux' ]
+then
+  git config --global credential.helper store
+fi
+
