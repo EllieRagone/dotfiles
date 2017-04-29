@@ -21,6 +21,7 @@ ln -sf ~/.dotfiles/prompt/prompt_peter_setup ~/.zprezto/modules/prompt/functions
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/aliases ~/.aliases
 ln -sf ~/.dotfiles/bin ~/bin
+ln -sf ~/.dotfiles/ruby/gemrc ~/.gemrc
 
 # Configure global git settings
 git config --global user.name 'Peter Ragone'
