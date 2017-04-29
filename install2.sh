@@ -13,7 +13,7 @@ ln -sf ~/.dotfiles/prompt/zshenv ~/.zshenv
 ln -sf ~/.dotfiles/prompt/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/prompt/prompt_peter_setup ~/.zprezto/modules/prompt/functions/prompt_peter_setup
 
-chsh -f /bin/zsh
+chsh -s /bin/zsh
 
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
