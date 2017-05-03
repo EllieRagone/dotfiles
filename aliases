@@ -42,5 +42,5 @@ function vmstatus() {
 }
 
 function vmboot() {
-  VBoxManage startvm $1
+  VBoxManage startvm $1 --type headless
 }
