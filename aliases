@@ -34,3 +34,13 @@ if [[ "$uname_str" == 'Darwin' ]]; then
 fi
 alias psql='pgcli'
 
+
+alias vml='VBoxManage list vms'
+
+function vmstatus() {
+  VBoxManage showvminfo $1 | grep "State"
+}
+
+function vmboot() {
+  VBoxManage startvm $1
+}
