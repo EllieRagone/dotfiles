@@ -22,6 +22,9 @@ ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/aliases ~/.aliases
 ln -sf ~/.dotfiles/bin ~/bin
 ln -sf ~/.dotfiles/ruby/gemrc ~/.gemrc
+ln -sf ~/.dotfiles/tmux/tmux ~/.tmux
+ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux/tmux-powerlinerc ~/.tmux-powerlinerc
 
 # Configure global git settings
 git config --global user.name 'Peter Ragone'
