@@ -1,0 +1,43 @@
+#!/bin/zsh
+
+action=$1
+
+case "$action" in
+  boot)
+    VBoxManage startvm $2 --type headless
+    ;;
+  save)
+    VBoxManage controlvm $2 savestate
+    ;;
+  status)
+    if [[ -z $2 ]]
+    then
+      IFS=$'\n'
+      for line in $(VBoxManage list vms | sed 's/"\([A-Za-z0-9 ]*\)".*/\1/g')
+      do
+        linelength=$(echo $line | wc -c)
+        if test $(($linelength < 8)) = 1
+        then
+          echo $line "\t\t" $(vm status "$line")
+        else
+          echo $line "\t" $(vm status "$line")
+        fi
+      done
+      unset IFS
+    else
+      VBoxManage showvminfo $2 | grep "State" | sed 's/State: *\(.*\) (since.*/\1/'
+    fi
+    ;;
+  list)
+    VBoxManage list vms
+    ;;
+  names)
+    IFS=$'\n'
+    VBoxManage list vms | sed 's/"\([A-Za-z0-9 ]*\)".*/\1/g'
+    unset IFS
+    ;;
+  *)
+    echo "Usage: $0 {boot|save|status|list} [machine]"
+    exit 1
+    ;;
+esac

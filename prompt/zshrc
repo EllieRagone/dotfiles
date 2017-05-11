@@ -14,6 +14,7 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/lib/connectiq/bin"
+export PATH="$PATH:$HOME/bin"
 
 # autoload -U history-beginning-search-backward
 # autoload -U history-beginning-search-forward

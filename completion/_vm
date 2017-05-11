@@ -17,7 +17,9 @@ _vm() {
         boot)
         ;&
         save)
-            compadd $(VBoxManage list vms)
+            IFS=$'\n'
+            compadd $(vm names)
+            unset IFS
         ;;
         *)
             _files 
