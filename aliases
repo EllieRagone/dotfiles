@@ -38,9 +38,22 @@ alias psql='pgcli'
 alias vml='VBoxManage list vms'
 
 function vmstatus() {
-  VBoxManage showvminfo $1 | grep "State"
+  if [[ -z $1 ]]
+  then
+    for line in $(vml | sed 's/"\([A-Za-z0-9 ]*\)".*/\1/g')
+    do
+      echo $line "\t" $(vms "$line"); 
+    done
+  else
+    VBoxManage showvminfo $1 | grep "State" | sed 's/State: *\(.*\) (since.*/\1/'
+  fi
 }
+alias vms=vmstatus
 
 function vmboot() {
   VBoxManage startvm $1 --type headless
+}
+
+function vmsave() {
+  VBoxManage controlvm $1 savestate
 }

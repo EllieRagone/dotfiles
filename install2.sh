@@ -1,6 +1,14 @@
 #!/bin/sh
 
-sudo apt-get -y install zsh git tmux vim
+if [ `uname` = 'Darwin' ]
+then
+  brew install zsh git tmux vim
+fi
+
+if [ `uname` = 'Linux' ]
+then
+  sudo apt-get -y install zsh git tmux vim
+fi
 
 # Get all the dotfiles
 git clone https://www.github.com/pcragone/dotfiles ~/.dotfiles
@@ -42,9 +50,12 @@ then
 fi
 
 
-# Install RVM with ruby
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
+if [ `uname` = 'Linux' ]
+then
+  # Install RVM with ruby
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  \curl -sSL https://get.rvm.io | bash -s stable --ruby
+fi
 
 # Install Vim plugins
 vim +BundleInstall +qall
