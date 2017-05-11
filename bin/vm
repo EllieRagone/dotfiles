@@ -4,10 +4,39 @@ action=$1
 
 case "$action" in
   boot)
-    VBoxManage startvm $2 --type headless
+    machine=$2
+
+    if [[ -z $machine ]]
+    then
+      echo "No machine specified"
+      exit 1
+    fi
+
+    if [[ $(vm status $machine) = "running" ]]
+    then
+      echo "$machine is running"
+      exit 1
+    fi
+
+
+    VBoxManage startvm $machine --type headless
     ;;
   save)
-    VBoxManage controlvm $2 savestate
+    machine=$2
+
+    if [[ -z $machine ]]
+    then
+      echo "No machine specified"
+      exit 1
+    fi
+
+    if [[ $(vm status $machine) != "running" ]]
+    then
+      echo "$machine is not running"
+      exit 1
+    fi
+
+    VBoxManage controlvm $machine savestate
     ;;
   status)
     if [[ -z $2 ]]
@@ -36,8 +65,38 @@ case "$action" in
     VBoxManage list vms | sed 's/"\([A-Za-z0-9 ]*\)".*/\1/g'
     unset IFS
     ;;
+  ssh)
+    machine=$2
+
+    if [[ -z $machine ]]
+    then
+      echo "No machine specified"
+      exit 1
+    fi
+
+    if [[ $(vm status $machine) != "running" ]]
+    then
+      echo "$machine is not running"
+      exit 1
+    fi
+
+    nat=$(VBoxManage showvminfo $2 | grep NIC | grep "Attachment: NAT")
+    bridged=$(VBoxManage showvminfo $2 | grep NIC | grep "Attachment: Bridged")
+
+    if [[ -n $nat ]]
+    then
+      port=$(VBoxManage showvminfo ubuntu | grep "NIC $result" | grep 'host port' | sed 's/.*host port = \([0-9]*\).*guest port = 22.*/\1/')
+      ssh 127.0.0.1 -p $port
+    fi
+
+    if [[ -n $bridged ]]
+    then
+      ip=$(VBoxManage guestproperty enumerate sandbox | grep IP | sed 's/.*value: \([0-9\.]*\).*/\1/')
+      ssh $ip
+    fi
+    ;;
   *)
-    echo "Usage: $0 {boot|save|status|list} [machine]"
+    echo "Usage: $0 {boot|ssh|save|status|list} [machine]"
     exit 1
     ;;
 esac

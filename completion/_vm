@@ -8,17 +8,24 @@ _vm() {
         '1: :->action'\
         '*: :->machine'
 
+    # actions=$(vm | sed 's/.*{\(.*\)}.*/\1/' | tr '|' $'\n')
+    actions=$(vm | sed 's/.*{\(.*\)}.*/\1/' | sed 's/|/ /g' | sort)
+
     case $state in
     action)
-        _arguments '1:action:(boot save status list)'
+        _arguments "1:action:($actions)"
     ;;
     *)
         case $words[2] in
         boot)
         ;&
+        ssh)
+        ;&
+        status)
+        ;&
         save)
             IFS=$'\n'
-            compadd $(vm names)
+            compadd $(vm names | sort)
             unset IFS
         ;;
         *)
