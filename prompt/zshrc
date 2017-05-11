@@ -33,3 +33,8 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 
 source ~/.aliases
 
+fpath=(~/.dotfiles/completion $fpath)
+autoload -U compinit
+compinit
+
+zstyle ':completion:*' menu select=2

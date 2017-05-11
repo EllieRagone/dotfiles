@@ -1,0 +1,28 @@
+#compdef vm
+
+_vm() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    _arguments \
+        '1: :->action'\
+        '*: :->machine'
+
+    case $state in
+    action)
+        _arguments '1:action:(boot save status list)'
+    ;;
+    *)
+        case $words[2] in
+        boot)
+        ;&
+        save)
+            compadd $(VBoxManage list vms)
+        ;;
+        *)
+            _files 
+        esac 
+    esac 
+}
+
+_vm "$@"

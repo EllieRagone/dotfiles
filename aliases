@@ -40,10 +40,12 @@ alias vml='VBoxManage list vms'
 function vmstatus() {
   if [[ -z $1 ]]
   then
+    IFS=$'\n'
     for line in $(vml | sed 's/"\([A-Za-z0-9 ]*\)".*/\1/g')
     do
       echo $line "\t" $(vms "$line"); 
     done
+    unset IFS
   else
     VBoxManage showvminfo $1 | grep "State" | sed 's/State: *\(.*\) (since.*/\1/'
   fi
