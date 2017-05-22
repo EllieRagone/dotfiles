@@ -18,7 +18,9 @@ fi
 #
 
 export EDITOR='nano'
+export EDITOR=`which vim`
 export VISUAL='nano'
+export VISUAL=`which vim`
 export PAGER='less'
 
 #

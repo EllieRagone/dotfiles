@@ -1,126 +1,76 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-sudo apt-get update
-sudo apt-get install -y python-software-properties
-sudo add-apt-repository -y ppa:git-core/ppa
-# sudo add-apt-repository -y ppa:fcwu-tw/ppa
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y tmux python-pip fontconfig zsh cmake python2.7-dev g++ git
-# sudo apt-get install -y vim git
-
-function run_or_exit {
-  if $1; then
-    if [ ! -z "$2" ]; then
-      echo $2
-    else
-      echo "OK"
-    fi
-  else
-    if [ ! -z "$3" ]; then
-      echo $3
-    fi
-
-    echo "Exiting"
-    exit 1
-  fi
-}
-
-function link_file {
-  filename=${1##*/}
-  run_or_exit "ln -sf $DOTFILES/$1 $HOME/.$filename" "Symlinked $1 to $HOME/.$filename" "Unable to create symlink for $1"
-}
-
-run_or_exit "source ./env" "Sourced ./env" "Unable to source ./env"
-
-
-# shell
-# ln -sf $DOTFILES/aliases $HOME/.aliases
-link_file 'aliases'
-# ln -sf $DOTFILES/env $HOME/.env
-link_file 'env'
-
-# bash
-# ln -sf $DOTFILES/bash_profile $HOME/.bash_profile
-link_file 'bash_profile'
-
-# zsh
-# prezto - super slow; (it's supposed to be better than oh-my-zsh by being
-# faster. I had the exact opposite experience)
-# # ln -sf $DOTFILES/zsh/prezto/zprezto/ $HOME/.zprezto
-# link_file "zsh/prezto/zprezto"
-# # ln -sf $DOTFILES/zsh/prezto/zlogin $HOME/.zlogin
-# link_file "zsh/prezto/zlogin"
-# # ln -sf $DOTFILES/zsh/prezto/zshenv $HOME/.zshenv
-# link_file "zsh/prezto/zshenv"
-# # ln -sf $DOTFILES/zsh/prezto/zshrc $HOME/.zshrc
-# link_file "zsh/prezto/zshrc"
-# # ln -sf $DOTFILES/zsh/prezto/zpreztorc $HOME/.zpreztorc
-# link_file "zsh/prezto/zpreztorc"
-
-# oh-my-zsh
-# curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-# ln -sf $DOTFILES/zsh/oh-my-zsh/pragone.zsh-theme $HOME/.oh-my-zsh/themes/pragone.zsh-theme
-ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh $HOME/.oh-my-zsh
-ln -sf $DOTFILES/zsh/oh-my-zsh/oh-my-zsh-zshrc $HOME/.zshrc
-
-
-# # git
-# ln -sf $DOTFILES/git/gitconfig $HOME/.gitconfig
-link_file "git/gitconfig"
-# ln -sf $DOTFILES/git/gitignore $HOME/.gitignore
-link_file "git/gitignore"
-
-# # vim
-# ln -sf $DOTFILES/vimrc $HOME/.vimrc
-link_file "vimrc"
-# ln -sf $DOTFILES/vim/ $HOME/.vim
-link_file "vim"
-# mkdir -p $HOME/.vimundo # the directory for undo files.
-
-# tmux
-# ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
-link_file "tmux/tmux.conf"
-# ln -sf $DOTFILES/tmux/tmux-powerlinerc $HOME/.tmux-powerlinerc
-link_file "tmux/tmux-powerlinerc"
-# ln -sf $DOTFILES/tmux/tmuxinator $HOME/.tmuxinator
-link_file "tmux/tmuxinator"
-
-# ruby
-# ln -sf $DOTFILES/ruby/gemrc $HOME/.gemrc
-link_file "ruby/gemrc"
-
-# bin/
-# ln -sf $DOTFILES/bin/ $HOME/bin
-link_file "bin"
-
-# battery status
-if [ $PLATFORM = "osx" ]; then
-  link_file "battery"
+if [ `uname` = 'Darwin' ]
+then
+  echo 'Installing zsh, git, tmux, and vim from Homebrew'
+  brew install zsh git tmux vim
 fi
 
-# lib/
-ln -sf $DOTFILES/lib $HOME/lib
+if [ `uname` = 'Linux' ]
+then
+  echo 'Installing zsh, git, tmux, and vim from apt-get'
+  brew install zsh git tmux vim
+  sudo apt-get -y install zsh git tmux vim
+fi
 
-# # Install Vundle
-# run_or_exit "git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
-# # Install Vim plugins:
-run_or_exit "vim +PluginInstall +qall"
+echo 'Cloning dotfiles into ~/.dotfiles'
+# Get all the dotfiles
+git clone https://www.github.com/pcragone/dotfiles ~/.dotfiles
 
-# Compile YouCompleteMe
-cd $HOME/.vim/bundle/YouCompleteMe
-./install.sh
-cd $DOTFILES
+echo 'Cloning zprezto into ~/.zprezto'
+# ZPrezto setup
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-sudo pip install powerline-status
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mkdir $HOME/.fonts
-mv PowerlineSymbols.otf $HOME/.fonts/
-fc-cache -vf $HOME/.fonts/
-mkdir -p $HOME/.config/fontconfig/conf.d/
-mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/
+echo 'Cloning Vundle into ~/.vim/bundle/Vundle.vim'
+# Vim Vundle setup
+mkdir -p ~/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-echo "source \"$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf\"" >> $HOME/.tmux.conf
+echo 'Symlinking files'
+# Symlink files
+ln -sf ~/.dotfiles/prompt/zlogout ~/.zlogout
+ln -sf ~/.dotfiles/prompt/zpreztorc ~/.zpreztorc
+ln -sf ~/.dotfiles/prompt/zprofile ~/.zprofile
+ln -sf ~/.dotfiles/prompt/zshenv ~/.zshenv
+ln -sf ~/.dotfiles/prompt/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/prompt/prompt_peter_setup ~/.zprezto/modules/prompt/functions/prompt_peter_setup
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
+ln -sf ~/.dotfiles/aliases ~/.aliases
+ln -sf ~/.dotfiles/bin ~/bin
+ln -sf ~/.dotfiles/ruby/gemrc ~/.gemrc
+ln -sf ~/.dotfiles/tmux/tmux ~/.tmux
+ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux/tmux-powerlinerc ~/.tmux-powerlinerc
 
-sudo chsh -s /bin/zsh vagrant
+echo 'Configuring git'
+# Configure global git settings
+git config --global user.name 'Peter Ragone'
+git config --global user.email 'pcragone@gmail.com'
+git config --global push.default simple
+
+if [ `uname` = 'Darwin' ]
+then
+  git config --global credential.helper osxkeychain
+fi
+
+if [ `uname` = 'Linux' ]
+then
+  git config --global credential.helper store
+fi
+
+
+if [ `uname` = 'Linux' ]
+then
+  echo 'Installing RVM'
+  # Install RVM with ruby
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  \curl -sSL https://get.rvm.io | bash -s stable --ruby
+fi
+
+echo 'Installing Vim plugins'
+# Install Vim plugins
+vim +BundleInstall +qall
+
+echo 'Changing shell to zsh'
+# Change shell to zsh
+chsh -s /bin/zsh

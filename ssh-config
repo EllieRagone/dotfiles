@@ -5,6 +5,3 @@ Host paramedoc.org
   IdentityFile ~/.ssh/paramedoc
 Host home
   HostName home.paramedoc.org
-Host sandbox
-  Hostname 10.0.0.1
-  Port 2222
