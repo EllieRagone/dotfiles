@@ -1,0 +1,2 @@
+pass in quick on vboxnet0 inet from any to any no state
+pass in quick on vboxnet1 inet from any to any no state

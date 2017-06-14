@@ -100,6 +100,7 @@ autocmd BufWritePre *.slim :%s/\s\+$//e
 
 au BufNewFile * set noeol
 au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile Vagrantfile set filetype=ruby
 au BufRead,BufNewFile {*.god,*.thor,*.pill,*.axlsx} set ft=ruby
 
 " No show command
