@@ -9,7 +9,6 @@ fi
 if [ `uname` = 'Linux' ]
 then
   echo 'Installing zsh, git, tmux, and vim from apt-get'
-  brew install zsh git tmux vim
   sudo apt-get -y install zsh git tmux vim
 fi
 
