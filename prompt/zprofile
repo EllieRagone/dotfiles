@@ -44,10 +44,10 @@ typeset -gU cdpath fpath mailpath path
 # )
 
 # Set the list of directories that Zsh searches for programs.
-path=(
-  /usr/local/{bin,sbin}
-  $path
-)
+# path=(
+#   /usr/local/{bin,sbin}
+#   $path
+# )
 
 #
 # Less
@@ -78,3 +78,6 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 lsln() {
   ls -l `find $1 -maxdepth 1 -type l -print`
 }
+
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

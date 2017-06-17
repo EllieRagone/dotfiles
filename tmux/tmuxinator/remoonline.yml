@@ -1,14 +1,14 @@
 # ~/.tmuxinator/remoonline.yml
 
 name: remoonline
-root: /vagrant
+root: /remoonline
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-# pre:
-#   - /Users/projects/remoonline/startzeus
+pre:
+  - /Users/projects/remoonline/startzeus
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
