@@ -38,6 +38,7 @@ ln -sf ~/.dotfiles/aliases ~/.aliases
 ln -sf ~/.dotfiles/bin ~/bin
 ln -sf ~/.dotfiles/ruby/gemrc ~/.gemrc
 ln -sf ~/.dotfiles/tmux/tmux ~/.tmux
+ln -sf ~/.dotfiles/tmux/tmuxinator ~/.tmuxinator
 ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/tmux/tmux-powerlinerc ~/.tmux-powerlinerc
 
