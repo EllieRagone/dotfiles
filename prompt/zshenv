@@ -8,7 +8,7 @@
 # 
 # Vagrant
 #
-export VAGRANT_CWD=".vagrant-$(hostname | sed 's/\.local//')"
+export VAGRANT_DOTFILE_PATH=".vagrant-$(hostname | sed 's/\.local//')"
 
 #
 # Editors
