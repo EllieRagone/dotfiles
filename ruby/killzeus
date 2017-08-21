@@ -1,5 +1,6 @@
 #!/bin/bash --login
-pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 server" | grep remoonline | awk '{print $2}'`
+APPLICATION=$1
+pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 server" | grep $APPLICATION | awk '{print $2}'`
 if [ $pid ]; then 
   echo 'Killing zeus server'
   kill $pid
@@ -7,7 +8,7 @@ else
   echo 'Zeus server not running'
 fi
 
-pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 start" | grep remoonline | awk '{print $2}'`
+pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 start" | grep $APPLICATION | awk '{print $2}'`
 if [ $pid ]; then 
   echo 'Killing zeus'
   kill $pid
