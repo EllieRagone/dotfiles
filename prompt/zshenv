@@ -9,6 +9,7 @@
 # Vagrant
 #
 export VAGRANT_DOTFILE_PATH=".vagrant-$(hostname | sed 's/\.local//')"
+export ZEUSSOCK="/tmp/zeus.sock"
 
 #
 # Editors
