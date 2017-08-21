@@ -1,0 +1,23 @@
+#!/bin/bash --login
+pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 server" | grep remoonline | awk '{print $2}'`
+if [ $pid ]; then 
+  echo 'Killing zeus server'
+  kill $pid
+else 
+  echo 'Zeus server not running'
+fi
+
+pid=`ps aux | egrep "zeus-(linux|darwin)-amd64 start" | grep remoonline | awk '{print $2}'`
+if [ $pid ]; then 
+  echo 'Killing zeus'
+  kill $pid
+else 
+  echo 'Zeus not running'
+fi
+
+if [ -z "$ZEUSSOCK"  ]
+then
+  rm ./.zeus.sock > /dev/null 2> /dev/null
+else
+  rm $ZEUSSOCK > /dev/null 2> /dev/null
+fi
