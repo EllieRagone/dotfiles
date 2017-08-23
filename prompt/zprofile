@@ -50,6 +50,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 if [ -z ${TERM+x} ]
 then
+else
   if [ $TERM = "screen-256color" ]
   then
     rvm use
