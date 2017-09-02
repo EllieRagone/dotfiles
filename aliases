@@ -11,6 +11,10 @@ alias gws='git status -sb'
 # undo the last commit
 alias gu='git reset HEAD~1'
 
+# 
+alias co='!sh -c ''git stash; git stash apply; git checkout "$*"'''
+alias checkpoint='!git stash; git stash apply'
+
 #
 # ls
 # 

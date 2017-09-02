@@ -7,8 +7,8 @@ root: /home/pragone/swapandsnooze
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-pre:
-  - /home/pragone/swapandsnooze/startzeus
+# pre:
+#   - /home/pragone/swapandsnooze/startzeus
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -35,7 +35,8 @@ windows:
   - sidekiq: 
       layout: main-horizontal
       layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
-      panes:
-        - ruby start_redis.rb
-        - sidekiq
+      # panes:
+        # - ruby start_redis.rb
+        # - sidekiq
   - editor: vim
+  - shell: 
