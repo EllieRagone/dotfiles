@@ -1,7 +1,7 @@
 # ~/.tmuxinator/swapandsnooze.yml
 
 name: swapandsnooze
-root: /home/pragone/swapandsnooze
+root: /projects/swapandsnooze
 
 # Optional tmux socket
 # socket_name: foo
