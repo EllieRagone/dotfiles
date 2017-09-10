@@ -195,12 +195,12 @@ nmap fg :BuffergatorMruCyclePrev<CR>
 let g:rspec_command = "Dispatch zeus rspec {spec}"
 let g:turbux_command_prefix = 'zeus '
 let g:no_turbux_mappings = 1
-nmap <leader><leader>tr <Plug>SendTestToTmux
-nmap <leader><leader>TR <Plug>SendFocusedTestToTmux
-nmap <leader><leader>tt <Plug>StoreTmuxLastCommand
-nmap <leader><leader>TT <Plug>StoreTmuxLastFocusedCommand
-nmap <leader>t <Plug>SendLastTestToTmux
-nmap <leader>T <Plug>SendLastFocusedTestToTmux
+nmap <leader><leader>TR <Plug>SendTestToTmux
+nmap <leader><leader>tr <Plug>SendFocusedTestToTmux
+nmap <leader><leader>TT <Plug>StoreTmuxLastCommand
+nmap <leader><leader>tt <Plug>StoreTmuxLastFocusedCommand
+nmap <leader>T <Plug>SendLastTestToTmux
+nmap <leader>t <Plug>SendLastFocusedTestToTmux
 
 nmap <leader>j :only<CR>
 
@@ -306,12 +306,16 @@ nmap <script> <silent> <leader>Q :call ToggleQuickfixList()<CR>
 
 " Tabular.vim
 " if exists(":Tabularize")
-nmap <leader>a=<CR> :Tabularize /=<CR>
-vmap <leader>a=<CR> :Tabularize /=<CR>
-nmap <leader>a=> :Tabularize /=><CR>
-vmap <leader>a=> :Tabularize /=><CR>
-nmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a :Tabularize /
+vmap <leader>a :Tabularize /
+" nmap <leader>a=<CR> :Tabularize /=<CR>
+" vmap <leader>a=<CR> :Tabularize /=<CR>
+" nmap <leader>a=> :Tabularize /=><CR>
+" vmap <leader>a=> :Tabularize /=><CR>
+" nmap <leader>a: :Tabularize /:\zs<CR>
+" vmap <leader>a: :Tabularize /:\zs<CR>
+" nmap <leader>a{ :Tabularize /{\zs<CR>
+" vmap <leader>a{ :Tabularize /{\zs<CR>
 " endif
 
 nnoremap <leader>. :CtrlPTag<cr>
