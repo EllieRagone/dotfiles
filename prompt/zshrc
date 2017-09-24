@@ -11,10 +11,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export PYTHONPATH="$HOME/Library/Python/3.6/bin"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/lib/connectiq/bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$PYTHONPATH"
 
 # autoload -U history-beginning-search-backward
 # autoload -U history-beginning-search-forward
