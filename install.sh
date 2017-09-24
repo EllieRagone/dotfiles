@@ -3,13 +3,14 @@
 if [ `uname` = 'Darwin' ]
 then
   echo 'Installing zsh, git, tmux, and vim from Homebrew'
-  brew install zsh git tmux vim
+  brew install zsh git tmux vim python3
+  pip3 install powerline
 fi
 
 if [ `uname` = 'Linux' ]
 then
   echo 'Installing zsh, git, tmux, and vim from apt-get'
-  sudo apt-get -y install zsh git tmux vim
+  sudo apt-get -y install zsh git tmux vim powerline
 fi
 
 echo 'Cloning dotfiles into ~/.dotfiles'
@@ -37,10 +38,23 @@ ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/aliases ~/.aliases
 ln -sf ~/.dotfiles/bin ~/bin
 ln -sf ~/.dotfiles/ruby/gemrc ~/.gemrc
-ln -sf ~/.dotfiles/tmux/tmux ~/.tmux
 ln -sf ~/.dotfiles/tmux/tmuxinator ~/.tmuxinator
 ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/tmux/tmux-powerlinerc ~/.tmux-powerlinerc
+
+# Install powerline
+echo 'Installing powerline'
+# if [ `uname` = 'Darwin' ]
+# then
+  ln -sf ~/.dotfiles/powerline ~/.config/powerline
+# fi
+
+# Leaving commented out for now in case I need it later. Should work fine with
+# the above symlink though
+# if [ `uname` = 'Linux' ]
+# then
+#   sudo ln -sf ~/.dotfiles/powerline/colorscheme.json /usr/share/powerline/config_files/colorschemes/tmux/default.json
+#   sudo ln -sf ~/.dotfiles/powerline/theme.json /usr/share/powerline/config_files/themes/tmux/default.json
+# fi
 
 echo 'Configuring git'
 # Configure global git settings
