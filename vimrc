@@ -30,9 +30,10 @@ Bundle 'jeetsukumaran/vim-buffergator'
 "Bundle 'thoughtbot/vim-rspec'
 "Bundle 'jgdavey/tslime.vim'
 Bundle 'tomtom/tcomment_vim'
-Bundle 'benmills/vimux'
+" Bundle 'benmills/vimux'
 Bundle 'pcragone/vim-turbux'
-Bundle 'jingweno/vimux-zeus'
+" Bundle 'jingweno/vimux-zeus'
+Bundle 'tpope/vim-dispatch'
 
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
@@ -191,15 +192,17 @@ nmap fg :BuffergatorMruCyclePrev<CR>
 "map <Leader>l :call RunLastSpec()<CR>
 "map <Leader>a :call RunAllSpecs()<CR>
 "let g:rspec_runner = "os_x_iterm"
-"let g:rspec_command = 'call VimuxRunCommand("zeus rspec {spec}\n")'
+let g:rspec_command = "Dispatch zeus rspec {spec}"
 let g:turbux_command_prefix = 'zeus '
 let g:no_turbux_mappings = 1
-nmap <leader><leader>tr <Plug>SendTestToTmux
-nmap <leader><leader>TR <Plug>SendFocusedTestToTmux
-nmap <leader><leader>tt <Plug>StoreTmuxLastCommand
-nmap <leader><leader>TT <Plug>StoreTmuxLastFocusedCommand
-nmap <leader>t <Plug>SendLastTestToTmux
-nmap <leader>T <Plug>SendLastFocusedTestToTmux
+nmap <leader><leader>TR <Plug>SendTestToTmux
+nmap <leader><leader>tr <Plug>SendFocusedTestToTmux
+nmap <leader><leader>TT <Plug>StoreTmuxLastCommand
+nmap <leader><leader>tt <Plug>StoreTmuxLastFocusedCommand
+nmap <leader>T <Plug>SendLastTestToTmux
+nmap <leader>t <Plug>SendLastFocusedTestToTmux
+
+nmap <leader>j :only<CR>
 
 " Go programming
 set rtp+=/usr/local/Cellar/go/1.0.3/misc/vim
@@ -215,10 +218,10 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 
 " Vimux-Zeus
-map <Leader>zc :ZeusConsole<CR>
+map <Leader>zc :Dispatch zeus console<CR>
 "map <Leader>zr :ZeusRake spec<CR>
-map <Leader>zr :ZeusRake<space>
-map <Leader>zg :ZeusGenerate<space>
+map <Leader>zr :Dispatch zeus rake<space>
+noremap <Leader>zg :Dispatch zeus generate<space>
 
 " Rails
 
@@ -303,12 +306,16 @@ nmap <script> <silent> <leader>Q :call ToggleQuickfixList()<CR>
 
 " Tabular.vim
 " if exists(":Tabularize")
-nmap <leader>a=<CR> :Tabularize /=<CR>
-vmap <leader>a=<CR> :Tabularize /=<CR>
-nmap <leader>a=> :Tabularize /=><CR>
-vmap <leader>a=> :Tabularize /=><CR>
-nmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a :Tabularize /
+vmap <leader>a :Tabularize /
+" nmap <leader>a=<CR> :Tabularize /=<CR>
+" vmap <leader>a=<CR> :Tabularize /=<CR>
+" nmap <leader>a=> :Tabularize /=><CR>
+" vmap <leader>a=> :Tabularize /=><CR>
+" nmap <leader>a: :Tabularize /:\zs<CR>
+" vmap <leader>a: :Tabularize /:\zs<CR>
+" nmap <leader>a{ :Tabularize /{\zs<CR>
+" vmap <leader>a{ :Tabularize /{\zs<CR>
 " endif
 
 nnoremap <leader>. :CtrlPTag<cr>

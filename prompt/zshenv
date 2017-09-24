@@ -10,6 +10,8 @@
 #
 export VAGRANT_DOTFILE_PATH=".vagrant-$(hostname | sed 's/\.local//')"
 export ZEUSSOCK="/tmp/zeus.sock"
+export ZEUS_START_PIDFILE="/tmp/zeus-start.pid"
+export ZEUS_SERVER_PIDFILE="/tmp/zeus-server.pid"
 
 #
 # Editors

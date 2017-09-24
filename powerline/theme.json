@@ -1,0 +1,35 @@
+{
+	"segments": {
+    "left": [
+			{
+				"function": "powerline.segments.common.net.hostname"
+      },
+      {
+        "function": "powerline.segments.common.net.internal_ip"
+      },
+      {
+        "function": "powerline.segments.common.net.external_ip"
+      }
+    ],
+		"right": [
+			{
+				"function": "powerline.segments.common.time.date",
+        "name": "day",
+        "args": {
+					"format": "%A"
+        }
+			},
+			{
+				"function": "powerline.segments.common.time.date"
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+				"args": {
+					"format": "%H:%M",
+					"istime": true
+				}
+			}
+		]
+	}
+}
