@@ -58,12 +58,19 @@ echo 'Installing powerline'
 
 echo 'Configuring git'
 # Configure global git settings
-git config --global user.name 'Peter Ragone'
-git config --global user.email 'pcragone@gmail.com'
-git config --global push.default simple
+if [ `uname` = 'Linux' ]
+then
+  su pragone -c "git config --global user.name 'Peter Ragone'"
+  su pragone -c "git config --global user.email 'pcragone@gmail.com'"
+  su pragone -c "git config --global push.default simple"
+  su pragone -c "git config --global credential.helper store"
+fi
 
 if [ `uname` = 'Darwin' ]
 then
+  git config --global user.name 'Peter Ragone'
+  git config --global user.email 'pcragone@gmail.com'
+  git config --global push.default simple
   git config --global credential.helper osxkeychain
 fi
 
@@ -75,11 +82,6 @@ then
   echo "anchor \"com.pccr\"" | sudo tee -a /etc/pf.conf
   echo "load anchor \"com.pccr\" from \"/etc/pf.anchors/com.pccr\"" | sudo tee -a /etc/pf.conf
   sudo pfctl -f /etc/pf.conf
-fi
-
-if [ `uname` = 'Linux' ]
-then
-  git config --global credential.helper store
 fi
 
 if [ `uname` = 'Linux' ]
