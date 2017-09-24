@@ -67,11 +67,20 @@ then
   git config --global credential.helper osxkeychain
 fi
 
+if [ `uname` = 'Darwin' ]
+then
+  # Install pf anchor bypasses for virtualbox (required in order to get
+  # networking in virtualbox to work correctly with PrivateInternetAccess VPN running)
+  sudo ln -s ~/.dotfiles/lib/vbox.pfrules /etc/pf.anchors/com.pccr
+  echo "anchor \"com.pccr\"" | sudo tee -a /etc/pf.conf
+  echo "load anchor \"com.pccr\" from \"/etc/pf.anchors/com.pccr\"" | sudo tee -a /etc/pf.conf
+  sudo pfctl -f /etc/pf.conf
+fi
+
 if [ `uname` = 'Linux' ]
 then
   git config --global credential.helper store
 fi
-
 
 if [ `uname` = 'Linux' ]
 then
