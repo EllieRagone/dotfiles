@@ -50,3 +50,14 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 [[ -s "$HOME/.rvm/scripts/rvm"  ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function* 
+
+
+# Powerline
+if [ `uname` = 'Linux' ]
+then
+  export POWERLINE_PATH="/usr/share/powerline"
+fi
+if [ `uname` = 'Darwin' ]
+then
+  export POWERLINE_PATH="/Users/pragone/Library/Python/3.6/lib/python/site-packages/powerline"
+fi
