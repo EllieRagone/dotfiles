@@ -45,22 +45,3 @@ lsln() {
   ls -l `find $1 -maxdepth 1 -type l -print`
 }
 
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-# If the $TERM variable is exists, is set to "screen-256color", and the files
-# .ruby-version and .ruby-gemset exist in the current directory, then run `rvm
-# use`
-# A little more background:
-# - Running 'rvm use' looks for .ruby-gemset and .ruby-version in the current
-# directory, and sets those appropriately
-# - However, if we're in tmux, for some reason that doesn't run when splitting
-# or opening a new console
-#   - We can check if we're in tmux by looking at $TERM, and seeing if it equals
-#   "screen-256color"
-#   - However, if the variable isn't set at all, zsh complains.
-if [[ !(-z ${TERM+x}) && $TERM = "screen-256color" && -a .ruby-version && -a .ruby-gemset ]]
-then
-  rvm use
-fi
-

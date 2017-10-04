@@ -184,25 +184,25 @@ echo ""
 echo "Removing duplicates in the 'Open With' menu"
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
-echo ""
-echo "Disable smart quotes and smart dashes? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-fi
+# echo ""
+# echo "Disable smart quotes and smart dashes? (y/n)"
+# read -r response
+# if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+#   defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+#   defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# fi
 
-echo ""
-echo "Add ability to toggle between Light and Dark mode in Yosemite using ctrl+opt+cmd+t? (y/n)"
-# http://www.reddit.com/r/apple/comments/2jr6s2/1010_i_found_a_way_to_dynamically_switch_between/
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
-fi
+# echo ""
+# echo "Add ability to toggle between Light and Dark mode in Yosemite using ctrl+opt+cmd+t? (y/n)"
+# # http://www.reddit.com/r/apple/comments/2jr6s2/1010_i_found_a_way_to_dynamically_switch_between/
+# read -r response
+# if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+#   sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+# fi
 
-echo ""
-echo "Disable Photos.app from starting everytime a device is plugged in"
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+# echo ""
+# echo "Disable Photos.app from starting everytime a device is plugged in"
+# defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 
 ###############################################################################
@@ -271,21 +271,21 @@ echo ""
 echo "Disabling press-and-hold for special keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-echo ""
-echo "Setting a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 0
+# echo ""
+# echo "Setting a blazingly fast keyboard repeat rate"
+# defaults write NSGlobalDomain KeyRepeat -int 0
 
-echo ""
-echo "Disable auto-correct? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-fi
+# echo ""
+# echo "Disable auto-correct? (y/n)"
+# read -r response
+# if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+#   defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# fi
 
-echo ""
-echo "Setting trackpad & mouse speed to a reasonable number"
-defaults write -g com.apple.trackpad.scaling 2
-defaults write -g com.apple.mouse.scaling 2.5
+# echo ""
+# echo "Setting trackpad & mouse speed to a reasonable number"
+# defaults write -g com.apple.trackpad.scaling 2
+# defaults write -g com.apple.mouse.scaling 2.5
 
 #echo ""
 #echo "Turn off keyboard illumination when computer is not used for 5 minutes"
@@ -564,10 +564,10 @@ echo ""
 echo "Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-echo ""
-echo "Disabling the annoying backswipe in Chrome"
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+# echo ""
+# echo "Disabling the annoying backswipe in Chrome"
+# defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+# defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
 echo ""
 echo "Using the system-native print preview dialog in Chrome"
@@ -579,9 +579,9 @@ defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 # Mail
 ###############################################################################
 
-echo ""
-echo "Setting email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+# echo ""
+# echo "Setting email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
+# defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
 ###############################################################################

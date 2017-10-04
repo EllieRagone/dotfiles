@@ -11,10 +11,30 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PYTHONPATH="$HOME/Library/Python/3.6/bin"
+export PATH="$PATH:$PYTHONPATH"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/lib/connectiq/bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# If the $TERM variable is exists, is set to "screen-256color", and the files
+# .ruby-version and .ruby-gemset exist in the current directory, then run `rvm
+# use`
+# A little more background:
+# - Running 'rvm use' looks for .ruby-gemset and .ruby-version in the current
+# directory, and sets those appropriately
+# - However, if we're in tmux, for some reason that doesn't run when splitting
+# or opening a new console
+#   - We can check if we're in tmux by looking at $TERM, and seeing if it equals
+#   "screen-256color"
+#   - However, if the variable isn't set at all, zsh complains.
+if [[ !(-z ${TERM+x}) && $TERM = "screen-256color" && -a .ruby-version && -a .ruby-gemset ]]
+then
+  rvm use
+fi
 
 # autoload -U history-beginning-search-backward
 # autoload -U history-beginning-search-forward
