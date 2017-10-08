@@ -57,6 +57,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-abolish'
 
+Bundle 'vim-scripts/BufOnly.vim'
 " Optional:
 Bundle "honza/vim-snippets"
 
@@ -203,6 +204,7 @@ nmap <leader>T <Plug>SendLastTestToTmux
 nmap <leader>t <Plug>SendLastFocusedTestToTmux
 
 nmap <leader>j :only<CR>
+nmap <leader>q :BufOnly<CR>
 
 " Go programming
 set rtp+=/usr/local/Cellar/go/1.0.3/misc/vim
@@ -231,6 +233,8 @@ noremap <silent> <Space> :silent noh<Bar>echo<CR>
 command -nargs=0 Quit :qa!
 cnoreabbrev wq w<bar>bd
 cnoreabbrev q bd
+cnoreabbrev Q qall
+cnoreabbrev W wall
 cnoreabbrev qa :bufdo bdelete
 
 set tags+=gems.tags
