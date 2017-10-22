@@ -7,8 +7,8 @@ root: /projects/remoonline
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-pre:
-  - /projects/startzeus
+on_project_start:
+  - bundle install
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -24,18 +24,17 @@ windows:
       layout: main-horizontal
       layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
       panes:
-        # - source .env; zeus start
         - tail -f log/zeus.log
-        # - source .env; sleep 30; zeus server
         - tail -f log/development.log
-#        - tail -f log/test.log
   - sql: psql -U remoonline -d remoonline_development
   - console: rails console
   - guard: guard
   - sidekiq: 
       layout: main-horizontal
-      layout: acab,202x24,0,0[202x2,0,0,36,202x21,0,3,37]
+      layout: ac32,289x34,0,0[289x2,0,0,4,289x15,0,3,9,289x15,0,19,10]
       panes:
-        - ruby start_redis.rb
+        - mailcatcher --smtp-ip 192.16.1.220 --http-ip 192.16.1.220
+        - redis-server
         - sidekiq
   - editor: vim
+  - shell: 
