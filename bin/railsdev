@@ -1,0 +1,192 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'ostruct'
+
+class RailsDev
+  attr_accessor :options
+  attr_accessor :machine
+
+  VALID_COMMANDS = ["boot", "suspend", "terminate", "ssh", "status", "up"]
+
+  def initialize(machine, options={})
+    @options = options
+    @options.ssh ||= true
+    @options.verbose ||= false
+    
+    validate_machine!(machine)
+  end
+
+  def self.run!
+    machine = ARGV.shift
+    command = ARGV.shift
+
+    options = OpenStruct.new
+    options.ssh = true
+
+    OptionParser.new do |opts|
+      opts.banner = "Usage: railsdev [options] <machine> <command>"
+
+      opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+        options.verbose = v
+      end
+
+      opts.on("--[no-]ssh", "Immediately ssh upon re(boot) (default: true)") do |v|
+        options.ssh = v
+      end
+    end.parse!
+
+    exe = self.new(machine, options)
+
+    exe.validate_command!(command)
+
+    exe.verbose "Successfully validated command `#{command}`"
+    exe.execute!
+  end
+
+  def validate_machine!(machine_name)
+    verbose "Validating machine #{machine_name}"
+    @machine = Vagrant.global_status.find { |machine| machine.name == machine_name }
+    error "Machine \"#{machine_name}\" not found" if @machine.nil? or @machine.id.nil? or @machine.id.empty?
+    update_status
+  end
+
+  def update_status
+    verbose "Updating machine status..."
+    @machine.status = Vagrant.status(@machine.id)
+    verbose "...status updated to #{@machine.status}"
+  end
+
+  def validate_command!(command)
+    verbose "Validating command #{command}"
+    error "Command \"#{command}\" not found" unless VALID_COMMANDS.include?(command)
+    @command = command
+  end
+
+  def execute!
+    verbose "Executing command `#{@command}`..."
+    case @command
+    when "ssh"
+      ssh
+    when "boot"
+      boot
+    when "up"
+      verbose "up"
+      up
+    when "suspend"
+      suspend
+    end
+  end
+
+  def ssh
+    verbose "Executing `ssh`..."
+    if @machine.status == "running"
+      exec "vagrant ssh #{@machine.id}"
+    else
+      if affirmative(question "#{@machine.name} is not running - do you want to start it?")
+        boot
+        ssh
+      end
+    end
+  end
+
+  def boot
+    verbose "Executing `boot`..."
+    if other_machines = other_machine_running?
+      names = other_machines.join(", ")
+      if affirmative(question "#{names} running - do you want to stop and boot #{@machine.name}?")
+        other_machines.each do |machine|
+          `vagrant suspend #{machine.id}`
+        end
+      else
+        puts "Other machines running. Exiting..."
+        exit 0
+      end
+    else
+      verbose "Booting machine #{@machine.name}..."
+      `vagrant up #{@machine.id}`
+      verbose "...booting (`vagrant up #{@machine.id}`) finished!"
+    end
+  end
+  alias_method :up, :boot
+
+  def other_machine_running?
+    verbose "Checking status of other machines..."
+    other_machines = Vagrant.global_status.reject { |m| m.id == @machine.id }.reject { |m| Vagrant.status(m.id) != "running" }
+    verbose "...no other machines running" if other_machines.empty?
+    return false if other_machines.empty?
+
+    other_machines.collect do |machine|
+      name if Vagrant.status(machine.id) == "running"
+    end.reject(&:nil?)
+  end
+
+  def suspend
+    verbose "Suspending #{@machine.name}"
+    `vagrant suspend #{@machine.id}`
+  end
+
+  def restart
+  end
+  alias_method :reboot, :restart
+
+  def executable_name
+    __FILE__.split(File::SEPARATOR).last
+  end
+
+  def error(message)
+    if @options.verbose
+      raise message
+    else
+      puts "#{executable_name}: #{message}"
+      exit 1
+    end
+  end
+
+  def verbose(message)
+    puts message if verbose?
+  end
+
+  def verbose?
+    @options.verbose
+  end
+
+  def question(message)
+    puts message
+    gets.chomp
+  end
+
+  def affirmative(answer)
+    ["yes", "y"].include?(answer.to_s.downcase)
+  end
+end
+
+class Vagrant
+  FIELDS = [:id, :name, :type, :status, :location]
+
+  def self.global_status
+    results = `vagrant global-status`.split("\n")[2..-8]
+    results.map do |machine|
+      OpenStruct.new(Hash[FIELDS.zip(machine.split(" ").map(&:strip))])
+    end
+  end
+
+  def self.status(machine_id)
+    result = `vagrant status #{machine_id}`
+    _, status, _ = result.split("\n")[2].split(" ")
+    return status
+  end
+
+  def self.up(machine_id)
+    `vagrant up #{machine_id}`
+  end
+
+  def self.ssh(machine_id)
+  end
+
+  def self.suspend(machine_id)
+    `vagrant suspend #{machine_id}`
+  end
+end
+
+RailsDev.run!
