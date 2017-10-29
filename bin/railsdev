@@ -8,24 +8,23 @@ class RailsDev
   attr_accessor :machine
 
   VALID_COMMANDS = ["boot", "suspend", "terminate", "ssh", "status", "up"]
+  VALID_WITHOUT_MACHINE = ["status"]
 
   def initialize(machine, options={})
     @options = options
     @options.ssh ||= true
     @options.verbose ||= false
-    
-    validate_machine!(machine)
+    @options.validate_machine = true if @options.validate_machine.nil?
+
+    validate_machine!(machine) if @options.validate_machine
   end
 
   def self.run!
-    machine = ARGV.shift
-    command = ARGV.shift
-
     options = OpenStruct.new
     options.ssh = true
 
     OptionParser.new do |opts|
-      opts.banner = "Usage: railsdev [options] <machine> <command>"
+      opts.banner = "Usage: railsdev [options] <command> <machine>"
 
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options.verbose = v
@@ -35,6 +34,13 @@ class RailsDev
         options.ssh = v
       end
     end.parse!
+
+    command = ARGV.shift
+    machine = ARGV.shift
+
+    if machine.nil? and VALID_WITHOUT_MACHINE.include?(command)
+      options.validate_machine ||= false
+    end
 
     exe = self.new(machine, options)
 
@@ -75,6 +81,8 @@ class RailsDev
       up
     when "suspend"
       suspend
+    when "status"
+      status
     end
   end
 
@@ -130,6 +138,12 @@ class RailsDev
   end
   alias_method :reboot, :restart
 
+  def status
+    Vagrant.global_status.each do |machine|
+      puts "#{machine.name.ljust(25)}\t#{Vagrant.status(machine.id)}"
+    end
+  end
+
   def executable_name
     __FILE__.split(File::SEPARATOR).last
   end
@@ -182,6 +196,8 @@ class Vagrant
   end
 
   def self.ssh(machine_id)
+    command = "/usr/bin/osascript /Users/pragone/bin/opentab.scpt \"vagrant ssh #{machine_id}\""
+    exec command
   end
 
   def self.suspend(machine_id)
