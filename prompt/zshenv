@@ -15,6 +15,15 @@ export ZEUS_SERVER_PIDFILE="/tmp/zeus-server.pid"
 export NOTIFICATION_HOST_IP="192.16.1.1"
 export HOST_HOSTNAME="eiger"
 
+# Paths
+export PYTHONPATH="$HOME/Library/Python/3.6/bin"
+export PATH="$PATH:$PYTHONPATH"
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/lib/connectiq/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH"
+
 #
 # Editors
 #
