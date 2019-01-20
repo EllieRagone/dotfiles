@@ -13,6 +13,7 @@ export ZEUSSOCK="/tmp/zeus.sock"
 export ZEUS_START_PIDFILE="/tmp/zeus-start.pid"
 export ZEUS_SERVER_PIDFILE="/tmp/zeus-server.pid"
 export NOTIFICATION_HOST_IP="192.16.1.1"
+export HOST_HOSTNAME="eiger"
 
 # Paths
 export PYTHONPATH="$HOME/Library/Python/3.6/bin"
