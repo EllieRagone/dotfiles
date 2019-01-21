@@ -45,6 +45,7 @@ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 echo 'Installing powerline'
 # if [ `uname` = 'Darwin' ]
 # then
+  mkdir -p ~/.config
   ln -sf ~/.dotfiles/powerline ~/.config/powerline
 # fi
 
