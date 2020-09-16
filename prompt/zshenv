@@ -70,5 +70,6 @@ then
 fi
 if [ `uname` = 'Darwin' ]
 then
-  export POWERLINE_PATH="/Users/pragone/Library/Python/3.6/lib/python/site-packages/powerline"
+  # export POWERLINE_PATH="/Users/pragone/Library/Python/3.6/lib/python/site-packages/powerline"
+  export POWERLINE_PATH="/usr/local/lib/python3.7/site-packages/powerline"
 fi
